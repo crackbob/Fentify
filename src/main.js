@@ -1,6 +1,7 @@
 import moduleManager from "./module/moduleManager";
 import events from "./events";
 import hooks from "./hooks"
+import stores from "./utils/stores";
 
 class Fentify {
     constructor() {
@@ -22,6 +23,7 @@ class Fentify {
         moduleManager.init();
 
         window.hooks = hooks;
+        window.stores = stores;
     }
 
     disable () {

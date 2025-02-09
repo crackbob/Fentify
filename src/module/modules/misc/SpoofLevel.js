@@ -11,13 +11,13 @@ export default class SpoofLevel extends Module {
     }
 
     onEnable() {
-        if (stores.userStore?.lvl) this.ogLevel = stores.userStore.lvl;
+        if (stores.userStore?.user?.lvl) this.ogLevel = stores.userStore.user.lvl;
         stores.userStore.user = stores.userStore.user || {};
-        stores.userStore.lvl = this.options["Level"];
+        stores.userStore.user.lvl = this.options["Level"];
     }
 
     onDisable() {
         stores.userStore.user = stores.userStore.user || {};
-        stores.userStore.lvl = this.ogLevel;
+        stores.userStore.user.lvl = this.ogLevel;
     }
 }
