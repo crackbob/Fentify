@@ -8,7 +8,7 @@ export default class NoHitDelay extends Module {
     }
 
     get hitSystem () {
-        return hooks.gameWorld.systemsManager.activeExecuteSystems.find(sys => sys?.attackTimeDelayMs !== undefined);
+        return hooks.gameWorld.systemsManager.activeExecuteSystems.find(sys => sys?.lastAttackTimeMs !== undefined);
     }
 
     onEnable() {
