@@ -11,6 +11,8 @@ import Nuker from "./modules/misc/Nuker";
 import SpoofLevel from "./modules/misc/SpoofLevel";
 import Emote from "./modules/misc/Emote";
 import AdBypass from "./modules/misc/AdBypass";
+import Velocity from "./modules/movement/Velocity";
+import NoHitDelay from "./modules/combat/NoHitDelay";
 
 export default {
     modules: {},
@@ -45,7 +47,9 @@ export default {
             new Nuker(),
             new SpoofLevel(),
             new Emote(),
-            new AdBypass()
+            new AdBypass(),
+            new Velocity(),
+            new NoHitDelay()
         );
 
         events.on("render", () => {
