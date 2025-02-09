@@ -22,7 +22,9 @@ export default class Nuker extends Module {
             while (dy <= radius) {
                 while (dz <= radius) {
                     if (Math.sqrt(dx * dx + dy * dy + dz * dz) <= radius) {
-                        blocks.push([blockPos[0] + dx, blockPos[1] + dy, blockPos[2] + dz]);
+                        if (hooks.gameWorld.chunkManager.getBlock(blockPos[0] + dx, blockPos[1] + dy, blockPos[2] + dz) !== 0) {
+                            blocks.push([blockPos[0] + dx, blockPos[1] + dy, blockPos[2] + dz]);
+                        }
                     }
                     dz++;
                 }

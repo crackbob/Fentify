@@ -13,6 +13,9 @@ import Emote from "./modules/misc/Emote";
 import AdBypass from "./modules/misc/AdBypass";
 import Velocity from "./modules/movement/Velocity";
 import NoHitDelay from "./modules/combat/NoHitDelay";
+import Fly from "./modules/movement/Fly";
+import NoFall from "./modules/movement/NoFall";
+import Speed from "./modules/movement/Speed";
 
 export default {
     modules: {},
@@ -49,7 +52,10 @@ export default {
             new Emote(),
             new AdBypass(),
             new Velocity(),
-            new NoHitDelay()
+            new NoHitDelay(),
+            new Fly(),
+            new NoFall(),
+            new Speed()
         );
 
         events.on("render", () => {
