@@ -5,7 +5,10 @@ export default {
         this.appendHook = (name, hook) => this[name] = hook;
         let fnString = document.querySelector("#app").__vue_app__._context.config.globalProperties.$router.options.routes[0].children[0].component.toString();
         this.chunks = eval("[" + fnString.split('[')[1].replace(")", "").split(",")).filter(src => src.includes(".js"));
+        let userImport = Object.values(document.scripts).find(script => script?.src?.includes("index")).src.replace("https://vectaria.io/", "");
         this.importedModules = [];
+
+        this.chunks.push(userImport);
 
         Function(`
             async function initHooks() {

@@ -8,6 +8,7 @@ import Airjump from "./modules/movement/Airjump";
 import Instabreak from "./modules/misc/Instabreak";
 import SpoofBlock from "./modules/misc/SpoofBlock";
 import Nuker from "./modules/misc/Nuker";
+import SpoofLevel from "./modules/misc/SpoofLevel";
 
 export default {
     modules: {},
@@ -39,7 +40,8 @@ export default {
             new Airjump(),
             new Instabreak(),
             new SpoofBlock(),
-            new Nuker()
+            new Nuker(),
+            new SpoofLevel()
         );
 
         events.on("render", () => {
