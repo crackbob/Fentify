@@ -9,6 +9,8 @@ import Instabreak from "./modules/misc/Instabreak";
 import SpoofBlock from "./modules/misc/SpoofBlock";
 import Nuker from "./modules/misc/Nuker";
 import SpoofLevel from "./modules/misc/SpoofLevel";
+import Emote from "./modules/misc/Emote";
+import AdBypass from "./modules/misc/AdBypass";
 
 export default {
     modules: {},
@@ -41,7 +43,9 @@ export default {
             new Instabreak(),
             new SpoofBlock(),
             new Nuker(),
-            new SpoofLevel()
+            new SpoofLevel(),
+            new Emote(),
+            new AdBypass()
         );
 
         events.on("render", () => {
