@@ -16,6 +16,7 @@ import NoHitDelay from "./modules/combat/NoHitDelay";
 import Fly from "./modules/movement/Fly";
 import NoFall from "./modules/movement/NoFall";
 import Speed from "./modules/movement/Speed";
+import FreeCoupons from "./modules/misc/FreeCoupons";
 
 export default {
     modules: {},
@@ -55,7 +56,8 @@ export default {
             new NoHitDelay(),
             new Fly(),
             new NoFall(),
-            new Speed()
+            new Speed(),
+            new FreeCoupons()
         );
 
         events.on("render", () => {

@@ -1,5 +1,6 @@
 import Module from "../../module";
 import hooks from "../../../hooks";
+import moduleManager from "../../moduleManager";
 
 export default class Nuker extends Module {
     constructor() {
@@ -47,6 +48,7 @@ export default class Nuker extends Module {
                 }, delay);
             } else {
                 context.blockIndex = 0;
+                moduleManager.modules["Nuker"].disable();
             }
         }
         breakNextBlock();
