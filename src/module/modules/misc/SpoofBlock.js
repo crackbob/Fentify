@@ -14,6 +14,7 @@ export default class SpoofBlock extends Module {
     }
 
     onEnable () {
+        let moduleContext = this;
         let menuContainer = document.createElement("div");
         menuContainer.className = "blockSelector";
         document.body.appendChild(menuContainer);
@@ -44,7 +45,7 @@ export default class SpoofBlock extends Module {
             button.addEventListener("click", () => {
                 stores.itemMgrStore[1][stores.itemMgrStore.selectedItem][0] = id;
                 hooks.gameWorld.player.currentHandItemId = id;
-                this.blockID = id;
+                moduleContext.blockID = id;
                 menuContainer.remove();
             });
             itemContainer.appendChild(button);
