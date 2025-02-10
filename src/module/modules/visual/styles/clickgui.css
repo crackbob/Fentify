@@ -200,3 +200,21 @@
         transform: scaleY(1);
     }
 }
+
+.blockSelector {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    overflow-y: auto;
+    background-color: rgba(40, 40, 40);
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 9999;
+}
+
+.blockSelector::-webkit-scrollbar {
+    display: none;
+}
