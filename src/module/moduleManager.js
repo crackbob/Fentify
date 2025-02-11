@@ -17,6 +17,7 @@ import Fly from "./modules/movement/Fly";
 import NoFall from "./modules/movement/NoFall";
 import Speed from "./modules/movement/Speed";
 import FreeCoupons from "./modules/misc/FreeCoupons";
+import Chams from "./modules/visual/Chams";
 
 export default {
     modules: {},
@@ -57,7 +58,8 @@ export default {
             new Fly(),
             new NoFall(),
             new Speed(),
-            new FreeCoupons()
+            new FreeCoupons(),
+            new Chams()
         );
 
         events.on("render", () => {
