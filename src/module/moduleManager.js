@@ -19,6 +19,7 @@ import Speed from "./modules/movement/Speed";
 import FreeCoupons from "./modules/misc/FreeCoupons";
 import Chams from "./modules/visual/Chams";
 import Triggerbot from "./modules/combat/Triggerbot";
+import Scaffold from "./modules/movement/Scaffold";
 
 export default {
     modules: {},
@@ -61,7 +62,8 @@ export default {
             new Speed(),
             new FreeCoupons(),
             new Chams(),
-            new Triggerbot()
+            new Triggerbot(),
+            new Scaffold()
         );
 
         events.on("render", () => {
