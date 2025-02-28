@@ -23,7 +23,6 @@ export default {
                 let appendHook = this.appendHook;
                 targetClass.prototype.execute = function () {
                     appendHook("gameWorld", this.gameWorld);
-                    targetClass.prototype.execute = _execute;
                     return _execute.apply(this, arguments);
                 };
             }

@@ -2,9 +2,9 @@ import Module from "../../module";
 import hooks from "../../../hooks";
 import moduleManager from "../../moduleManager";
 
-export default class Nuker extends Module {
+export default class Fill extends Module {
     constructor() {
-        super("Nuker", "Misc", {
+        super("Fill", "Misc", {
             "Radius": 4,
             "Delay": 120
         });
@@ -16,7 +16,6 @@ export default class Nuker extends Module {
         let radius = this.options["Radius"];
         let blockUnderPlayer = Object.values(hooks.gameWorld.player.position).map(Math.floor);
         blockUnderPlayer[1]--;
-        
 
         let dx = -radius, dy = -radius, dz = -radius;
         let blocks = [];
@@ -27,8 +26,9 @@ export default class Nuker extends Module {
                     if (Math.sqrt(dx * dx + dy * dy + dz * dz) <= radius) {
                         let blockPos = [blockUnderPlayer[0] + dx, blockUnderPlayer[1] + dy, blockUnderPlayer[2] + dz];
                         let blockID = hooks.gameWorld.chunkManager.getBlock(...blockPos);
+                        let replaceable = hooks.gameWorld.allItems[blockID]?.replaceable || false;
 
-                        if (blockID !== 0) {
+                        if (replaceable || blockID == 0) {
                             blocks.push(blockPos);
                         }
                     }
@@ -43,19 +43,20 @@ export default class Nuker extends Module {
         
         let context = this;
         let delay = this.options["Delay"];
-        function breakNextBlock() {
+        function placeNextBlock() {
+            let blockId = hooks.gameWorld.player.currentHandItemId;
             if (context.blockIndex < blocks.length) {
                 const [newX, newY, newZ] = blocks[context.blockIndex];
                 setTimeout(() => {
-                    hooks.gameWorld.chunkManager.placeBlockWithMsgSending(newX, newY, newZ, 0);
+                    hooks.gameWorld.chunkManager.placeBlockWithMsgSending(newX, newY, newZ, blockId);
                     context.blockIndex++;
-                    breakNextBlock();
+                    placeNextBlock();
                 }, delay);
             } else {
                 context.blockIndex = 0;
-                moduleManager.modules["Nuker"].disable();
+                moduleManager.modules["Fill"].disable();
             }
         }
-        breakNextBlock();
+        placeNextBlock();
     }
 }

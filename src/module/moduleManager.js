@@ -20,6 +20,8 @@ import FreeCoupons from "./modules/misc/FreeCoupons";
 import Chams from "./modules/visual/Chams";
 import Triggerbot from "./modules/combat/Triggerbot";
 import Scaffold from "./modules/movement/Scaffold";
+import Fill from "./modules/misc/Fill";
+import NoClip from "./modules/movement/NoClip";
 
 export default {
     modules: {},
@@ -63,7 +65,9 @@ export default {
             new FreeCoupons(),
             new Chams(),
             new Triggerbot(),
-            new Scaffold()
+            new Scaffold(),
+            new Fill(),
+            new NoClip()
         );
 
         events.on("render", () => {
