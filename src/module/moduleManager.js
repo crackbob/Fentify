@@ -22,6 +22,7 @@ import Triggerbot from "./modules/combat/Triggerbot";
 import Scaffold from "./modules/movement/Scaffold";
 import Fill from "./modules/misc/Fill";
 import NoClip from "./modules/movement/NoClip";
+import Killaura from "./modules/combat/Killaura";
 
 export default {
     modules: {},
@@ -67,7 +68,8 @@ export default {
             new Triggerbot(),
             new Scaffold(),
             new Fill(),
-            new NoClip()
+            new NoClip(),
+            new Killaura()
         );
 
         events.on("render", () => {
