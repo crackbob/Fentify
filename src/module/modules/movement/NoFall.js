@@ -7,14 +7,16 @@ export default class NoFall extends Module {
     }
 
     onRender () {
-        
-        // im sorry
+        let blockPos = hooks.gameWorld.player.position.clone().floor();
+        blockPos.y--;
+        let blockDirectlyUnderPlayer = !!hooks.gameWorld.chunkManager.getBlock(...blockPos);
+        blockPos.y -= 2;
+        let blockUnderPlayer = !!hooks.gameWorld.chunkManager.getBlock(...blockPos);
 
-        let blockPos = Object.values(hooks.gameWorld.player.position).map(Math.floor);
 
-        blockPos[1]--;
-        if (hooks.gameWorld.chunkManager.getBlock(...blockPos) !== 0) {
-            hooks.gameWorld.player.velocity.velVec3.y = -0.5;
+        if (blockUnderPlayer && hooks.gameWorld.player.velocity.velVec3.y < -6 && !blockDirectlyUnderPlayer) {
+            hooks.gameWorld.player.position.y = blockPos.y + 1.5;
+            hooks.gameWorld.player.velocity.velVec3.y = 0.1;
         }
     }
 };

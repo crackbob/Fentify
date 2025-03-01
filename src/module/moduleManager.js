@@ -23,6 +23,8 @@ import Scaffold from "./modules/movement/Scaffold";
 import Fill from "./modules/misc/Fill";
 import NoClip from "./modules/movement/NoClip";
 import Killaura from "./modules/combat/Killaura";
+import BlockOutline from "./modules/visual/BlockOutline";
+import TPAura from "./modules/combat/TPAura";
 
 export default {
     modules: {},
@@ -69,7 +71,9 @@ export default {
             new Scaffold(),
             new Fill(),
             new NoClip(),
-            new Killaura()
+            new Killaura(),
+            new BlockOutline(),
+            new TPAura
         );
 
         events.on("render", () => {
