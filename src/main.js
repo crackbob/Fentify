@@ -21,9 +21,6 @@ class Fentify {
 
         hooks.init();
         moduleManager.init();
-
-        window.hooks = hooks;
-        window.gameUtils = gameUtils;
     }
 
     disable () {
