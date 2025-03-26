@@ -8,7 +8,7 @@ export default class Instabreak extends Module {
     }
 
     onEnable() {
-        Object.values(hooks.gameWorld.allItems).forEach((block) => {
+        Object.values(hooks.stores.gameState.gameWorld.allItems).forEach((block) => {
             if (block?.destruction) {
                 if (!this.originalHardness.has(block)) {
                     this.originalHardness.set(block, block.destruction.durability);
@@ -19,7 +19,7 @@ export default class Instabreak extends Module {
     }
 
     onDisable() {
-        Object.values(hooks.gameWorld.allItems).forEach((block) => {
+        Object.values(hooks.stores.gameState.gameWorld.allItems).forEach((block) => {
             if (block?.destruction && this.originalHardness.has(block)) {
                 block.destruction.durability = this.originalHardness.get(block);
             }

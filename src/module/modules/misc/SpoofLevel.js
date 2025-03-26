@@ -1,6 +1,5 @@
 import Module from "../../module";
 import hooks from "../../../hooks";
-import stores from "../../../utils/stores";
 
 export default class SpoofLevel extends Module {
     constructor() {
@@ -11,13 +10,13 @@ export default class SpoofLevel extends Module {
     }
 
     onEnable() {
-        if (stores.userStore?.user?.lvl) this.ogLevel = stores.userStore.user.lvl;
-        stores.userStore.user = stores.userStore.user || {};
-        stores.userStore.user.lvl = this.options["Level"];
+        if (hooks.stores.user?.user?.lvl) this.ogLevel = hooks.stores.user.user.lvl;
+        hooks.stores.user.user = hooks.stores.user.user || {};
+        hooks.stores.user.user.lvl = this.options["Level"];
     }
 
     onDisable() {
-        stores.userStore.user = stores.userStore.user || {};
-        stores.userStore.user.lvl = this.ogLevel;
+        hooks.stores.user.user = hooks.stores.user.user || {};
+        hooks.stores.user.user.lvl = this.ogLevel;
     }
 }

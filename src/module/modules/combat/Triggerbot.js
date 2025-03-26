@@ -1,6 +1,5 @@
 import Module from "../../module";
 import hooks from "../../../hooks";
-import stores from "../../../utils/stores";
 
 export default class Triggerbot extends Module {
     constructor() {
@@ -11,7 +10,7 @@ export default class Triggerbot extends Module {
     }
 
     get hitSystem () {
-        return hooks.gameWorld.systemsManager.activeExecuteSystems.find(sys => sys?.lastAttackTimeMs !== undefined);
+        return hooks.stores.gameState.gameWorld.systemsManager.activeExecuteSystems.find(sys => sys?.lastAttackTimeMs !== undefined);
     }
 
     onRender() {

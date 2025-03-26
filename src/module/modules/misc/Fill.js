@@ -14,7 +14,7 @@ export default class Fill extends Module {
     onEnable() {
         this.blockIndex = 0;
         let radius = this.options["Radius"];
-        let blockUnderPlayer = Object.values(hooks.gameWorld.player.position).map(Math.floor);
+        let blockUnderPlayer = Object.values(hooks.stores.gameState.gameWorld.player.position).map(Math.floor);
         blockUnderPlayer[1]--;
 
         let dx = -radius, dy = -radius, dz = -radius;
@@ -25,8 +25,8 @@ export default class Fill extends Module {
                 while (dz <= radius) {
                     if (Math.sqrt(dx * dx + dy * dy + dz * dz) <= radius) {
                         let blockPos = [blockUnderPlayer[0] + dx, blockUnderPlayer[1] + dy, blockUnderPlayer[2] + dz];
-                        let blockID = hooks.gameWorld.chunkManager.getBlock(...blockPos);
-                        let replaceable = hooks.gameWorld.allItems[blockID]?.replaceable || false;
+                        let blockID = hooks.stores.gameState.gameWorld.chunkManager.getBlock(...blockPos);
+                        let replaceable = hooks.stores.gameState.gameWorld.allItems[blockID]?.replaceable || false;
 
                         if (replaceable || blockID == 0) {
                             blocks.push(blockPos);
@@ -44,11 +44,11 @@ export default class Fill extends Module {
         let context = this;
         let delay = this.options["Delay"];
         function placeNextBlock() {
-            let blockId = hooks.gameWorld.player.currentHandItemId;
+            let blockId = hooks.stores.gameState.gameWorld.player.currentHandItemId;
             if (context.blockIndex < blocks.length) {
                 const [newX, newY, newZ] = blocks[context.blockIndex];
                 setTimeout(() => {
-                    hooks.gameWorld.chunkManager.placeBlockWithMsgSending(newX, newY, newZ, blockId);
+                    hooks.stores.gameState.gameWorld.chunkManager.placeBlockWithMsgSending(newX, newY, newZ, blockId);
                     context.blockIndex++;
                     placeNextBlock();
                 }, delay);

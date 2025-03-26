@@ -8,11 +8,11 @@ export default class NoClip extends Module {
     }
 
     onEnable() {
-        this.realGameMode = hooks.gameWorld.player.gameMode;
-        hooks.gameWorld.server.switchGameMode(3);
+        this.realGameMode = hooks.stores.gameState.gameWorld.player.gameMode;
+        hooks.stores.gameState.gameWorld.server.switchGameMode(3);
     }
 
     onDisable() {
-        hooks.gameWorld.server.switchGameMode(this.realGameMode);
+        hooks.stores.gameState.gameWorld.server.switchGameMode(this.realGameMode);
     }
 }

@@ -1,6 +1,5 @@
 import Module from "../../module";
 import hooks from "../../../hooks";
-import stores from "../../../utils/stores";
 
 export default class SpoofBlock extends Module {
     constructor() {
@@ -9,8 +8,8 @@ export default class SpoofBlock extends Module {
     }
 
     onRender () {
-        stores.itemMgrStore[1][stores.itemMgrStore.selectedItem][0] = this.blockID;
-        hooks.gameWorld.player.currentHandItemId = this.blockID;
+        hooks.stores.itemsManager[1][hooks.stores.itemsManager.selectedItem][0] = this.blockID;
+        hooks.stores.gameState.gameWorld.player.currentHandItemId = this.blockID;
     }
 
     onEnable () {
@@ -43,14 +42,14 @@ export default class SpoofBlock extends Module {
             img.src = $assetsUrls["defaultSurvival/renderItems/" + id + ".png"];
             button.appendChild(img);
             button.addEventListener("click", () => {
-                stores.itemMgrStore[1][stores.itemMgrStore.selectedItem][0] = id;
-                hooks.gameWorld.player.currentHandItemId = id;
+                hooks.stores.itemsManager[1][hooks.stores.itemsManager.selectedItem][0] = id;
+                hooks.stores.gameState.gameWorld.player.currentHandItemId = id;
                 moduleContext.blockID = id;
                 menuContainer.remove();
             });
             itemContainer.appendChild(button);
         }
 
-        Object.keys(hooks.gameWorld.allItems).forEach(key => addButton(key));
+        Object.keys(hooks.stores.gameState.gameWorld.allItems).forEach(key => addButton(key));
     }
 }

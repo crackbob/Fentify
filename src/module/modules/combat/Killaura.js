@@ -27,9 +27,9 @@ export default class Killaura extends Module {
 
         let targetPlayer = gameUtils.getClosestPlayer();
         var playerPosition = {
-            x: hooks.gameWorld.player.position.x,
-            y: hooks.gameWorld.player.position.y + yOffset,
-            z: hooks.gameWorld.player.position.z
+            x: hooks.stores.gameState.gameWorld.player.position.x,
+            y: hooks.stores.gameState.gameWorld.player.position.y + yOffset,
+            z: hooks.stores.gameState.gameWorld.player.position.z
         };
 
         var targetPosition = targetPlayer.position;
@@ -58,14 +58,14 @@ export default class Killaura extends Module {
         );
 
         if (distance < reach) {
-            hooks.gameWorld.server.sendData(61, [
+            hooks.stores.gameState.gameWorld.server.sendData(61, [
                 playerPosition.x,
                 playerPosition.y,
                 playerPosition.z,
                 direction.x,
                 direction.y,
                 direction.z,
-                hooks.gameWorld.time.localServerTimeMs,
+                hooks.stores.gameState.gameWorld.time.localServerTimeMs,
                 targetPlayer.id
             ]);
         }

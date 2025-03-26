@@ -30,9 +30,9 @@ export default class TPAura extends Module {
         if (!targetPlayer?.position) return;
 
         var playerPosition = {
-            x: hooks.gameWorld.player.position.x,
-            y: hooks.gameWorld.player.position.y + yOffset,
-            z: hooks.gameWorld.player.position.z
+            x: hooks.stores.gameState.gameWorld.player.position.x,
+            y: hooks.stores.gameState.gameWorld.player.position.y + yOffset,
+            z: hooks.stores.gameState.gameWorld.player.position.z
         };
 
         var targetPosition = targetPlayer.position;
@@ -61,10 +61,10 @@ export default class TPAura extends Module {
         );
 
         if (distance > radius) {
-            hooks.gameWorld.player.position = targetPlayer.position.clone();
+            hooks.stores.gameState.gameWorld.player.position = targetPlayer.position.clone();
         }
 
-        hooks.gameWorld.server.sendData(61, [
+        hooks.stores.gameState.gameWorld.server.sendData(61, [
             playerPosition.x,
             playerPosition.y,
             playerPosition.z,

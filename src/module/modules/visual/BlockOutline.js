@@ -10,7 +10,7 @@ export default class BlockOutline extends Module {
     }
 
     get selectedBlock () {
-        return hooks.gameWorld?.systemsManager.activeExecuteSystems.find(sys => sys?.currBlockPos !== undefined) || undefined;
+        return hooks.stores.gameState.gameWorld?.systemsManager.activeExecuteSystems.find(sys => sys?.currBlockPos !== undefined) || undefined;
     }
 
     onRender () {

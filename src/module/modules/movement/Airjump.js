@@ -7,12 +7,12 @@ export default class Airjump extends Module {
     }
 
     onEnable () {
-        hooks.gameWorld.player.collision.__defineGetter__("isGrounded", () => true);
-        hooks.gameWorld.player.collision.__defineSetter__("isGrounded", () => true);
+        hooks.stores.gameState.gameWorld.player.collision.__defineGetter__("isGrounded", () => true);
+        hooks.stores.gameState.gameWorld.player.collision.__defineSetter__("isGrounded", () => true);
     }
 
     onDisable () {
-        delete hooks.gameWorld.player.collision.isGrounded;
-        hooks.gameWorld.player.collision.isGrounded = true;
+        delete hooks.stores.gameState.gameWorld.player.collision.isGrounded;
+        hooks.stores.gameState.gameWorld.player.collision.isGrounded = true;
     }
 };

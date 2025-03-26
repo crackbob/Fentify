@@ -1,6 +1,5 @@
 import Module from "../../module";
 import hooks from "../../../hooks";
-import stores from "../../../utils/stores";
 import moduleManager from "../../moduleManager";
 
 export default class FreeCoupons extends Module {
@@ -16,7 +15,7 @@ export default class FreeCoupons extends Module {
             if (!response.ok) {
                 alert("Reached Daily limit");
             } else {
-                stores.userStore.user.coupons += 10;
+                hooks.stores.user.user.coupons += 10;
             }
         })
         moduleManager.modules["FreeCoupons"].disable();

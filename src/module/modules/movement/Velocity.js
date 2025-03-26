@@ -7,7 +7,7 @@ export default class Velocity extends Module {
     }
 
     get serverPacketHandlers () {
-        return hooks.gameWorld.server.msgsListeners
+        return hooks.stores.gameState.gameWorld.server.msgsListeners
     }
 
     get velocityPacket () {

@@ -7,16 +7,16 @@ export default class Scaffold extends Module {
     }
 
     onRender () {
-        let blockPos = Object.values(hooks.gameWorld.player.position).splice(0, 3).map(Math.floor);
+        let blockPos = Object.values(hooks.stores.gameState.gameWorld.player.position).splice(0, 3).map(Math.floor);
         
         blockPos[1]--;
 
-        let holdingBlockID = hooks.gameWorld.player.currentHandItemId;
-        let blockUnderID = hooks.gameWorld.chunkManager.getBlock(...blockPos);
-        let replaceable = hooks.gameWorld.allItems[blockUnderID]?.replaceable || false;
+        let holdingBlockID = hooks.stores.gameState.gameWorld.player.currentHandItemId;
+        let blockUnderID = hooks.stores.gameState.gameWorld.chunkManager.getBlock(...blockPos);
+        let replaceable = hooks.stores.gameState.gameWorld.allItems[blockUnderID]?.replaceable || false;
         
         if ((blockUnderID == 0 || replaceable) && holdingBlockID) {
-            hooks.gameWorld.chunkManager.placeBlockWithMsgSending(...blockPos, holdingBlockID);
+            hooks.stores.gameState.gameWorld.chunkManager.placeBlockWithMsgSending(...blockPos, holdingBlockID);
         }
     }
 };

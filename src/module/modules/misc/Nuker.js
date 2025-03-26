@@ -14,13 +14,13 @@ export default class Nuker extends Module {
     }
 
     get selectedBlock () {
-        return hooks.gameWorld?.systemsManager.activeExecuteSystems.find(sys => sys?.currBlockPos !== undefined) || undefined;
+        return hooks.stores.gameState.gameWorld?.systemsManager.activeExecuteSystems.find(sys => sys?.currBlockPos !== undefined) || undefined;
     }
 
     onEnable() {
         this.blockIndex = 0;
         let radius = this.options["Radius"];
-        let blockUnderPlayer = Object.values(hooks.gameWorld.player.position).map(Math.floor);
+        let blockUnderPlayer = Object.values(hooks.stores.gameState.gameWorld.player.position).map(Math.floor);
         blockUnderPlayer[1]--;
 
         if (this.options["Target Selected Block"]) {
@@ -35,7 +35,7 @@ export default class Nuker extends Module {
                 while (dz <= radius) {
                     if (Math.sqrt(dx * dx + dy * dy + dz * dz) <= radius) {
                         let blockPos = [blockUnderPlayer[0] + dx, blockUnderPlayer[1] + dy, blockUnderPlayer[2] + dz];
-                        let blockID = hooks.gameWorld.chunkManager.getBlock(...blockPos);
+                        let blockID = hooks.stores.gameState.gameWorld.chunkManager.getBlock(...blockPos);
 
                         if (blockID !== 0) {
                             blocks.push(blockPos);
@@ -56,7 +56,7 @@ export default class Nuker extends Module {
             if (context.blockIndex < blocks.length) {
                 const [newX, newY, newZ] = blocks[context.blockIndex];
                 setTimeout(() => {
-                    hooks.gameWorld.chunkManager.placeBlockWithMsgSending(newX, newY, newZ, 0);
+                    hooks.stores.gameState.gameWorld.chunkManager.placeBlockWithMsgSending(newX, newY, newZ, 0);
                     context.blockIndex++;
                     breakNextBlock();
                 }, options["Delay"]);
