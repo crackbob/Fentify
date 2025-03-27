@@ -7,6 +7,8 @@ export default class NoFall extends Module {
     }
 
     onRender () {
+        if (!hooks?.stores?.gameState?.gameWorld?.player) return;
+        
         let blockPos = hooks.stores.gameState.gameWorld.player.position.clone().floor();
         blockPos.y--;
         let blockDirectlyUnderPlayer = !!hooks.stores.gameState.gameWorld.chunkManager.getBlock(...blockPos);

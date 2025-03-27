@@ -25,6 +25,7 @@ import NoClip from "./modules/movement/NoClip";
 import Killaura from "./modules/combat/Killaura";
 import BlockOutline from "./modules/visual/BlockOutline";
 import TPAura from "./modules/combat/TPAura";
+import InstantRespawn from "./modules/misc/InstantRespawn";
 
 export default {
     modules: {},
@@ -73,7 +74,8 @@ export default {
             new NoClip(),
             new Killaura(),
             new BlockOutline(),
-            new TPAura
+            new TPAura(),
+            new InstantRespawn()
         );
 
         events.on("render", () => {
