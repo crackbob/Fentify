@@ -15,6 +15,7 @@ export default class TPAura extends Module {
 
     onRender() {
         const currentTime = Date.now();
+        if (!hooks?.stores?.gameState?.gameWorld?.player) return;
         if (currentTime - this.lastExecutionTime >= this.options["Delay"]) {
             this.lastExecutionTime = currentTime;
             this.tryKill();

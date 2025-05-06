@@ -8,6 +8,7 @@ export default class SpoofBlock extends Module {
     }
 
     onRender () {
+        if (!hooks?.stores?.gameState?.gameWorld?.player) return;
         hooks.stores.itemsManager[1][hooks.stores.itemsManager.selectedItem][0] = this.blockID;
         hooks.stores.gameState.gameWorld.player.currentHandItemId = this.blockID;
     }

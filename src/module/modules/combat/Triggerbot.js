@@ -16,6 +16,7 @@ export default class Triggerbot extends Module {
     onRender() {
         const currentTime = Date.now();
 
+        if (!hooks?.stores?.gameState?.gameWorld?.player) return;
         if (currentTime - this.lastExecutionTime >= this.options["Interval"] && this.hitSystem?.hitPlayers) {
             this.lastExecutionTime = currentTime;
             this.hitSystem.hitPlayers()

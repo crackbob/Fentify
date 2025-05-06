@@ -4,7 +4,6 @@ import hooks from "../../../hooks";
 export default class InstantRespawn extends Module {
     constructor() {
         super("InstantRespawn", "Misc", null);
-        this.originalHardness = new Map();
     }
 
     onRender() {
