@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Fendihfy
+// @name Fentify
 // @description we do a little trolling
 // @version 1.0.0
 // @author crackbob
