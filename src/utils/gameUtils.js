@@ -4,7 +4,7 @@ import mathUtils from "./mathUtils";
 export default {
     getClosestPlayer () {
         let localPlayerPos = hooks.stores.gameState.gameWorld.player.position;
-        let playersData = hooks.stores.gameState.gameWorld.server.playerIdToData;
+        let playersData = hooks.stores.gameState.gameWorld.server.players;
         let playersWithDistances = [];
 
         playersData.forEach(function(player, playerId) {
