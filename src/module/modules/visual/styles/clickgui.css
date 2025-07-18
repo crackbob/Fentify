@@ -4,7 +4,7 @@
 }
 
 :root {
-    --Fentify-accent-color: linear-gradient(90deg, rgb(64, 190, 255) 0%, rgb(129, 225, 255) 100%);
+    --Fendihfy-accent-color: linear-gradient(90deg, rgb(64, 190, 255) 0%, rgb(129, 225, 255) 100%);
     --button-color: rgb(40, 40, 40, 0.9);
     --hover-color: rgb(50, 50, 50, 0.9);
     --panel-bg: rgb(34, 34, 34, 0.85);
@@ -59,7 +59,7 @@
 }
 
 .gui-button.enabled {
-    background: var(--Fentify-accent-color);
+    background: var(--Fendihfy-accent-color);
 }
 
 .gui-button:not(.enabled):hover {
@@ -104,7 +104,7 @@
 }
 
 .gui-checkbox.enabled {
-    background: var(--Fentify-accent-color);
+    background: var(--Fendihfy-accent-color);
 }
 
 .gui-color-picker {

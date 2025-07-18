@@ -1,8 +1,8 @@
 {
-	"name": "Fentify",
+	"name": "Fendihfy",
 	"version": "1.0.0",
 	"description": "Utility tool for Vectaria.io",
-	"main": "src/Fentify.js",
+	"main": "src/Fendihfy.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "webpack",

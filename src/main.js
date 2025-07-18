@@ -3,7 +3,7 @@ import events from "./events";
 import hooks from "./hooks"
 import gameUtils from "./utils/gameUtils";
 
-class Fentify {
+class Fendihfy {
     constructor() {
         this.version = "1.0.0";
         this.init();
@@ -28,4 +28,6 @@ class Fentify {
     }
 };
 
-export default new Fentify();
+window.nigga = hooks;
+
+export default new Fendihfy();

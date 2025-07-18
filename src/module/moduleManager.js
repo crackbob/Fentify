@@ -6,9 +6,7 @@ import Watermark from "./modules/visual/Watermark";
 import ClickGUI from "./modules/visual/ClickGUI";
 import Airjump from "./modules/movement/Airjump";
 import Instabreak from "./modules/misc/Instabreak";
-import SpoofBlock from "./modules/misc/SpoofBlock";
 import Nuker from "./modules/misc/Nuker";
-import SpoofLevel from "./modules/misc/SpoofLevel";
 import Emote from "./modules/misc/Emote";
 import AdBypass from "./modules/misc/AdBypass";
 import Velocity from "./modules/movement/Velocity";
@@ -26,6 +24,7 @@ import Killaura from "./modules/combat/Killaura";
 import BlockOutline from "./modules/visual/BlockOutline";
 import TPAura from "./modules/combat/TPAura";
 import InstantRespawn from "./modules/misc/InstantRespawn";
+//import Dupe from "./modules/misc/Dupe";
 
 export default {
     modules: {},
@@ -56,9 +55,7 @@ export default {
             new ClickGUI(),
             new Airjump(),
             new Instabreak(),
-            new SpoofBlock(),
             new Nuker(),
-            new SpoofLevel(),
             new Emote(),
             new AdBypass(),
             new Velocity(),
@@ -75,7 +72,8 @@ export default {
             new Killaura(),
             new BlockOutline(),
             new TPAura(),
-            new InstantRespawn()
+            new InstantRespawn(),
+            //new Dupe()
         );
 
         events.on("render", () => {

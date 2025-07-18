@@ -18,13 +18,13 @@ const userscriptConfig = {
     ...commonConfig,
     output: {
         path: path.resolve(__dirname, "build"),
-        filename: "Fentify.user.js",
+        filename: "Fendihfy.user.js",
     },
     plugins: [
         new UserscriptPlugin({
             metajs: false,
             headers: {
-                name: "Fentify",
+                name: "Fendihfy",
                 supportURL: "https://github.com/crackbob/Fentify",
                 description: "we do a little trolling",
                 version: "1.0.0",
@@ -40,7 +40,7 @@ const regularScriptConfig = {
     ...commonConfig,
     output: {
         path: path.resolve(__dirname, "build"),
-        filename: "Fentify.min.js",
+        filename: "Fendihfy.min.js",
     },
     plugins: [],
 };

@@ -31,7 +31,7 @@ export default class ArrayList extends Module {
                 let textElem = document.createElement("span");
                 textElem.style.fontWeight = "800";
                 textElem.style.fontSize = "16px";
-                textElem.style.backgroundImage = "var(--Fentify-accent-color)";
+                textElem.style.backgroundImage = "var(--Fendihfy-accent-color)";
                 textElem.style.color = "transparent";
                 textElem.style.backgroundClip = "text";
                 textElem.innerHTML = name;
@@ -81,7 +81,7 @@ export default class ArrayList extends Module {
             this.arraylistContainer.style.textTransform = "lowercase";
 
             this.arraylistContainer.style.border = "2px solid transparent";
-            this.arraylistContainer.style.borderImage = "var(--Fentify-accent-color)";
+            this.arraylistContainer.style.borderImage = "var(--Fendihfy-accent-color)";
             this.arraylistContainer.style.borderImageSlice = "1";
             this.arraylistContainer.style.borderBottom = "0";
             this.arraylistContainer.style.borderLeft = "0";

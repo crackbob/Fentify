@@ -32,7 +32,7 @@ export default class ClickGUI extends Module {
     }
 
     updateColors() {
-        document.body.style.setProperty('--Fentify-accent-color', 
+        document.body.style.setProperty('--Fendihfy-accent-color', 
             `linear-gradient(90deg, ${this.options["Accent Color 1"]} 0%, ${this.options["Accent Color 2"]} 100%)`);
         document.body.style.setProperty('--button-color', this.options["Button Color"]);
         document.body.style.setProperty('--hover-color', this.options["Hover Color"]);
