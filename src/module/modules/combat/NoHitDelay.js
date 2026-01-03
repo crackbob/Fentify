@@ -1,22 +1,13 @@
-import Module from "../../module";
 import hooks from "../../../hooks";
+import Module from "../../Module";
 
 export default class NoHitDelay extends Module {
     constructor() {
         super("NoHitDelay", "Combat");
     }
 
-    get hitSystem () {
-        return hooks.stores.gameState.gameWorld.systemsManager.activeExecuteSystems.find(sys => sys?.lastAttackTimeMs !== undefined);
-    }
-
-    onEnable() {
-        this.hitSystem.__defineGetter__("attackTimeDelayMs", () => 0);
-        this.hitSystem.__defineSetter__("attackTimeDelayMs", () => 0);
-    }
-
-    onDisable() {
-        delete this.hitSystem.attackTimeDelayMs;
-        this.hitSystem.attackTimeDelayMs = 750;
+    onRender() {
+        let system = hooks.stores.get("gameState")?.gameWorld?.systemsManager?.activeSystems.find(sys => sys?.lastAttackTimeMs !== undefined);
+        if (system) system.attackTimeDelayMs = 0;
     }
 }

@@ -1,19 +1,21 @@
-import Module from "../../module.js";
+import Module from "../../Module.js";
 import moduleManager from "../../moduleManager.js";
 import events from "../../../events";
 import Panel from "./components/Panel.js";
-import "./styles/clickgui.css";
+import colorUtils from "../../../utils/colorUtils.js";
+import shadowWrapper from "../../../shadowWrapper.js";
 
 export default class ClickGUI extends Module {
     constructor() {
         super("ClickGUI", "Visual", {
-            "Accent Color 1": "rgb(64, 190, 255)",
-            "Accent Color 2": "rgb(129, 225, 255)",
+            "Accent Color 1": "#40beffff",
+            "Accent Color 2": "#81e1ffff",
             "Button Color": "rgb(40, 40, 40, 0.9)",
             "Hover Color": "rgb(50, 50, 50, 0.9)",
             "Header Color": "rgb(0, 0, 0, 0.85)",
             "Panel Color": "rgb(18 18 18)",
             "Text Color": "#ffffff",
+            "Glow Alpha": "0.8",
             "Enable Animations": true
         }, "ShiftRight");
 
@@ -25,20 +27,26 @@ export default class ClickGUI extends Module {
 
     updateAnimations() {
         if (this.options["Enable Animations"]) {
-            document.body.classList.add("with-animations");
+            shadowWrapper.wrapper.classList.add("with-animations");
         } else {
-            document.body.classList.remove("with-animations");
+            shadowWrapper.wrapper.classList.remove("with-animations");
         }
     }
 
     updateColors() {
-        document.body.style.setProperty('--Fendihfy-accent-color', 
-            `linear-gradient(90deg, ${this.options["Accent Color 1"]} 0%, ${this.options["Accent Color 2"]} 100%)`);
-        document.body.style.setProperty('--button-color', this.options["Button Color"]);
-        document.body.style.setProperty('--hover-color', this.options["Hover Color"]);
-        document.body.style.setProperty('--header-bg', this.options["Header Color"]);
-        document.body.style.setProperty('--panel-bg', this.options["Panel Color"]);
-        document.body.style.setProperty('--text-color', this.options["Text Color"]);
+        const accentGradient = `linear-gradient(90deg, ${this.options["Accent Color 1"]} 0%, ${this.options["Accent Color 2"]} 100%)`;
+        
+        shadowWrapper.wrapper.style.setProperty('--Fentify-accent-color', accentGradient);
+        shadowWrapper.wrapper.style.setProperty('--Fentify-accent-color', accentGradient);
+        shadowWrapper.wrapper.style.setProperty('--Fentify-accent-color-1', this.options["Accent Color 1"]);
+        shadowWrapper.wrapper.style.setProperty('--Fentify-accent-color-2', this.options["Accent Color 2"]);
+        shadowWrapper.wrapper.style.setProperty('--Fentify-button-color', this.options["Button Color"]);
+        shadowWrapper.wrapper.style.setProperty('--button-color', this.options["Button Color"]);
+        shadowWrapper.wrapper.style.setProperty('--hover-color', this.options["Hover Color"]);
+        shadowWrapper.wrapper.style.setProperty('--header-bg', this.options["Header Color"]);
+        shadowWrapper.wrapper.style.setProperty('--panel-bg', this.options["Panel Color"]);
+        shadowWrapper.wrapper.style.setProperty('--text-color', this.options["Text Color"]);
+        shadowWrapper.wrapper.style.setProperty('--glow-color', colorUtils.hexToRGBA(this.options["Accent Color 1"], parseFloat(this.options["Glow Alpha"]), 1.2));
     }
 
     onEnable() {
@@ -59,15 +67,16 @@ export default class ClickGUI extends Module {
     setupBackground() {
         this.blurredBackground = document.createElement("div");
         this.blurredBackground.className = "gui-background";
-        document.body.appendChild(this.blurredBackground);
+        shadowWrapper.wrapper.appendChild(this.blurredBackground);
     }
 
     createPanels() {
         const panelConfigs = [
             { title: "Combat", position: { top: "100px", left: "100px" } },
-            { title: "Movement", position: { top: "100px", left: "320px" } },
-            { title: "Visual", position: { top: "100px", left: "540px" } },
-            { title: "Misc", position: { top: "100px", left: "760px" } }
+            { title: "Movement", position: { top: "100px", left: "338px" } },
+            { title: "Visual", position: { top: "100px", left: "576px" } },
+            { title: "World", position: { top: "100px", left: "814px" } },
+            { title: "Misc", position: { top: "100px", left: "1052px" } },
         ];
 
         this.panels.forEach(panel => {
@@ -94,7 +103,21 @@ export default class ClickGUI extends Module {
             const panel = this.panels.find(p => p.header.textContent === category);
             if (!panel) return;
 
-            modules.sort((a, b) => b.name.length - a.name.length);
+            const measure = document.createElement("span");
+            measure.style.visibility = "hidden";
+            measure.style.position = "absolute";
+            measure.style.font = "'Product Sans', sans-serif";
+            shadowWrapper.wrapper.appendChild(measure);
+
+            modules.sort((a, b) => {
+                measure.textContent = a.name;
+                const widthA = measure.getBoundingClientRect().width;
+                measure.textContent = b.name;
+                const widthB = measure.getBoundingClientRect().width;
+                return widthB - widthA;
+            });
+
+            measure.remove();
             modules.forEach(module => panel.addButton(module));
         });
     }
@@ -114,9 +137,14 @@ export default class ClickGUI extends Module {
         this.blurredBackground.style.display = "block";
     }
 
+    returnToGame() {
+        
+    }
+
     onDisable() {
         this.panels.forEach(panel => panel.hide());
         this.blurredBackground.style.display = "none";
+        this.returnToGame();
     }
 
     onSettingUpdate() {

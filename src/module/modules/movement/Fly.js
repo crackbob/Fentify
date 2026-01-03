@@ -1,5 +1,5 @@
-import Module from "../../module";
 import hooks from "../../../hooks";
+import Module from "../../Module";
 
 export default class Fly extends Module {
     constructor () {
@@ -8,21 +8,23 @@ export default class Fly extends Module {
         })
     }
 
-    onEnable () {
-        hooks.stores.gameState.gameWorld.player.velocity.gravity = 0;
-    }
-
     onRender () {
-        if (hooks.stores.gameState.gameWorld.player.inputs.jump) {
-            hooks.stores.gameState.gameWorld.player.velocity.velVec3.y = this.options["Vertical Speed"];
-        } else if (hooks.stores.gameState.gameWorld.player.inputs.crouch) {
-            hooks.stores.gameState.gameWorld.player.velocity.velVec3.y = -this.options["Vertical Speed"];;
+        if (!hooks.stores.get("gameState").gameWorld?.player) return;
+        
+        let gameWorld = hooks.stores.get("gameState").gameWorld;
+
+        gameWorld.player.velocity.gravity = 0;
+
+        if (gameWorld.player.inputs.jump) {
+            gameWorld.player.velocity.velVec3.y = this.options["Vertical Speed"];
+        } else if (gameWorld.player.inputs.crouch) {
+            gameWorld.player.velocity.velVec3.y = -this.options["Vertical Speed"];
         } else {
-            hooks.stores.gameState.gameWorld.player.velocity.velVec3.y = 0;
+            gameWorld.player.velocity.velVec3.y = 0;
         }
     }
 
     onDisable () {
-        hooks.stores.gameState.gameWorld.player.velocity.gravity = 23;
+        hooks.stores.get("gameState").gameWorld.player.velocity.gravity = 23;
     }
 };

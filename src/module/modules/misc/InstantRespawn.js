@@ -1,5 +1,6 @@
-import Module from "../../module";
+
 import hooks from "../../../hooks";
+import Module from "../../Module";
 
 export default class InstantRespawn extends Module {
     constructor() {
@@ -7,11 +8,12 @@ export default class InstantRespawn extends Module {
     }
 
     onRender() {
-        if (!hooks?.stores?.gameState?.gameWorld?.player) return;
+        if (!hooks.stores.get("gameState").gameWorld?.player) return;
 
-        if (hooks.stores.playerState.isDeath) {
-            hooks.stores.playerState.respawn();
-            hooks.stores.playerState.isDeath = false;
+        let playerState = hooks.stores.get("playerState");
+        if (playerState.isDeath) {
+            playerState.respawn();
+            playerState.isDeath = false;
         }
     }
 }

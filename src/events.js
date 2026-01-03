@@ -22,6 +22,7 @@ export default {
 
         this.listeners[event].forEach(callback => callback(data));
     },
+
     trackKey: function (eventType, key, code) {
         if (eventType === "keydown") {
             moduleManager.handleKeyPress(code);

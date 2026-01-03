@@ -1,5 +1,6 @@
-import Module from "../../module";
+
 import hooks from "../../../hooks";
+import Module from "../../Module";
 
 export default class AdBypass extends Module {
     constructor() {
@@ -7,11 +8,11 @@ export default class AdBypass extends Module {
     }
 
     onEnable() {
-        this._reward = this._reward || hooks.stores.user.rewardCommercialVideoWrapper;
-        hooks.stores.user.rewardCommercialVideoWrapper = () => true;
+        this._reward = this._reward || hooks.stores.get("user").rewardCommercialVideoWrapper;
+        hooks.stores.get("user").rewardCommercialVideoWrapper = () => Promise.resolve(true);
     }
 
     onDisable() {
-        hooks.stores.user.rewardCommercialVideoWrapper = () => this._reward;
+        hooks.stores.get("user").rewardCommercialVideoWrapper = this._reward;
     }
 }

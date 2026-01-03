@@ -1,4 +1,4 @@
-import Module from "../../module";
+import Module from "../../Module";
 import hooks from "../../../hooks";
 
 export default class Velocity extends Module {
@@ -7,7 +7,7 @@ export default class Velocity extends Module {
     }
 
     get serverPacketHandlers () {
-        return hooks.stores.gameState.gameWorld.server.msgsListeners
+        return hooks.stores.get("gameState").gameWorld.server.msgsListeners
     }
 
     get velocityPacket () {

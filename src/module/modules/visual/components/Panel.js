@@ -1,3 +1,4 @@
+import shadowWrapper from "../../../../shadowWrapper.js";
 import ModuleSettings from "./ModuleSettings.js";
 
 export default class Panel {
@@ -12,7 +13,7 @@ export default class Panel {
         this.header.textContent = title;
         this.panel.appendChild(this.header);
         
-        document.body.appendChild(this.panel);
+        shadowWrapper.wrapper.appendChild(this.panel);
         this.buttons = [];
         this.setupDragHandling();
     }

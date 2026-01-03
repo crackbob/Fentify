@@ -8,23 +8,36 @@ export default class Module {
         this.keybind = keybind;
         this.waitingForBind = false;
         this.isEnabled = false;
+        this.modes = {};
         this.toggle = this.toggle.bind(this);
+    }
+
+    registerMode(settingName, modeOptions) {
+        this.modes[settingName] = modeOptions;
     }
 
     onEnable () {}
     onDisable() {}
     onRender() {}
     onSettingUpdate() {}
+    onChunkAdded() {}
+    onChunkRemoved() {}
+
+    onGameEntered() {}
+    onGameExited() {}
+    onNoaTick () {}
 
     enable () {
         this.isEnabled = true;
         eventListener.emit("module.update", this);
+        eventListener.emit("module.toggle", { name: this.name, enabled: true });
         this.onEnable();
     }
 
     disable () {
         this.isEnabled = false;
         eventListener.emit("module.update", this);
+        eventListener.emit("module.toggle", { name: this.name, enabled: false });
         this.onDisable();
     }
 

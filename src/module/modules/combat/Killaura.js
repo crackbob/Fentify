@@ -1,13 +1,13 @@
-import Module from "../../module";
 import hooks from "../../../hooks";
-import moduleManager from "../../moduleManager";
+import packets from "../../../packets";
 import gameUtils from "../../../utils/gameUtils";
+import Module from "../../Module";
 
 export default class Killaura extends Module {
     constructor() {
         super("Killaura", "Combat", {
             "Y Offset": 1.62,
-            "Reach": 5,
+            "Reach": 10,
             "Delay": 100
         });
         this.lastExecutionTime = null;
@@ -15,7 +15,8 @@ export default class Killaura extends Module {
 
     onRender() {
         const currentTime = Date.now();
-        if (!hooks?.stores?.gameState?.gameWorld?.player) return;
+        let gameWorld = hooks.stores.get("gameState").gameWorld;
+        if (!gameWorld?.player) return;
         if (currentTime - this.lastExecutionTime >= this.options["Delay"]) {
             this.lastExecutionTime = currentTime;
             this.tryKill();
@@ -26,21 +27,26 @@ export default class Killaura extends Module {
         let reach = this.options["Reach"];
         let yOffset = this.options["Y Offset"];
 
+        let gameWorld = hooks.stores.get("gameState").gameWorld;
+
         let targetPlayer = gameUtils.getClosestPlayer();
-        var playerPosition = {
-            x: hooks.stores.gameState.gameWorld.player.position.x,
-            y: hooks.stores.gameState.gameWorld.player.position.y + yOffset,
-            z: hooks.stores.gameState.gameWorld.player.position.z
+        let playerPosition = {
+            x: gameWorld.player.position.x,
+            y: gameWorld.player.position.y + yOffset,
+            z: gameWorld.player.position.z
         };
 
-        var targetPosition = targetPlayer.position;
-        var direction = {
+        let targetPosition = targetPlayer?.position;
+
+        if (!targetPosition) return;
+
+        let direction = {
             x: playerPosition.x - targetPosition.x,
             y: playerPosition.y - targetPosition.y,
             z: playerPosition.z - targetPosition.z
         };
 
-        var length = Math.sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+        let length = Math.sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
 
         if (length !== 0) {
             direction.x /= length;
@@ -52,21 +58,22 @@ export default class Killaura extends Module {
         direction.y = -direction.y;
         direction.z = -direction.z;
 
-        var distance = Math.sqrt(
+        let distance = Math.sqrt(
             Math.pow(playerPosition.x - targetPosition.x, 2) +
             Math.pow(playerPosition.y - targetPosition.y, 2) +
             Math.pow(playerPosition.z - targetPosition.z, 2)
         );
 
         if (distance < reach) {
-            hooks.stores.gameState.gameWorld.server.sendData(61, [
+            gameWorld.eventEmitter.emit(13); // attack anim
+            gameWorld.server.sendData(packets.toServer.HIT, [
                 playerPosition.x,
                 playerPosition.y,
                 playerPosition.z,
                 direction.x,
                 direction.y,
                 direction.z,
-                hooks.stores.gameState.gameWorld.time.localServerTimeMs,
+                gameWorld.time.localServerTimeMs,
                 targetPlayer.id
             ]);
         }

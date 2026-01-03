@@ -1,13 +1,13 @@
 import Module from "../../Module";
 import hooks from "../../../hooks";
 
-export default class Airjump extends Module {
+export default class AutoSprint extends Module {
     constructor () {
-        super("Airjump", "Movement", null);
+        super("AutoSprint", "Movement", null);
     }
 
     onRender () {
         if (!hooks.stores.get("gameState").gameWorld?.player) return;
-        hooks.stores.get("gameState").gameWorld.player.collision.isGrounded = true;
+        hooks.stores.get("gameState").gameWorld.player.velocity.speedBoosted = true;
     }
 };

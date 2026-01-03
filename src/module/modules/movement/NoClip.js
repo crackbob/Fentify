@@ -1,18 +1,26 @@
-import Module from "../../module";
+import Module from "../../Module";
 import hooks from "../../../hooks";
 
 export default class NoClip extends Module {
     constructor() {
         super("NoClip", "Movement");
-        this.realGameMode = 0;
     }
 
-    onEnable() {
-        this.realGameMode = hooks.stores.gameState.gameWorld.player.gameMode;
-        hooks.stores.gameState.gameWorld.server.switchGameMode(3);
+    get playerPhysicsSystem () {
+        return hooks.stores.get("gameState").gameWorld.systemsManager.activeSystems.find(sys => sys?.playerPhysicsSystem).playerPhysicsSystem;
+    }
+
+    onRender() {
+        if (!hooks.stores.get("gameState")?.gameWorld?.player) return;
+
+        this._og = this._og || this.playerPhysicsSystem.resolveBlockCollision;
+
+        if (this.playerPhysicsSystem.resolveBlockCollision == this._og) {
+            this.playerPhysicsSystem.resolveBlockCollision = () => {};
+        }
     }
 
     onDisable() {
-        hooks.stores.gameState.gameWorld.server.switchGameMode(this.realGameMode);
+        this.playerPhysicsSystem.resolveBlockCollision = this._og;
     }
 }
