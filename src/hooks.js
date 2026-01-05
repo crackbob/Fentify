@@ -1,16 +1,21 @@
 export default {
     async init () {
-        let indexPath = Object.values(document.getElementsByTagName("script")).find(script => script.src.includes("index-")).src;
-        let indexExports = (await import(indexPath));
-        this.storeMap = Object.values(indexExports).find(obj => obj.STORES);
-
         let provides = app._vnode.component.appContext.provides;
         let appState = provides[Object.getOwnPropertySymbols(provides).find(sym => provides[sym]._s)];
         this._stores = appState._s;
+
+        let keys =["app","gameState","friends","settings","sounds","itemsManager", "roomManager", "modals", "user", "chat", "playerState", "ads", "alertSystem", "shit", "somePrefabThing", "bub"]
+
+        let values = [...this._stores.values()];
+        this.namedStores = Object.fromEntries(
+            keys.map((k, i) => [k, values[i]])
+        );
+
+
     },
 
     getStore (storeName) {
-        return this._stores.get(this.storeMap[storeName]) || this._stores[storeName];
+        return this.namedStores[storeName];
     },
 
     get stores () {
