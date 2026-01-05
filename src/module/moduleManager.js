@@ -19,7 +19,6 @@ import ArrayList from "./modules/visual/Arraylist";
 import ClickGUI from "./modules/visual/ClickGUI";
 
 import Watermark from "./modules/visual/Watermark";
-import Crasher from "./modules/world/Crasher";
 import Instabreak from "./modules/world/Instabreak";
 import PickupReach from "./modules/world/PickupReach";
 import Scaffold from "./modules/world/Scaffold";
@@ -70,7 +69,6 @@ export default {
             // world
             Instabreak,
             Timer,
-            Crasher,
             Scaffold,
             PickupReach,
 

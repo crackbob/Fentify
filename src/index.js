@@ -15,6 +15,7 @@ function loadCSS (css) {
 
 loadCSS(clickGUICSS);
 
+hooks.init();
 moduleManager.init();
 packets.init();
 
@@ -26,7 +27,7 @@ setInterval(() => {
     events.emit("render");
 }, (1000 / 60));
 
-let debug = false;
+let debug = true;
 
 if (debug) {
     window.fentify = { hooks, shadowWrapper, moduleManager, packets };
