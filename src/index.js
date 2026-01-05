@@ -13,18 +13,6 @@ function loadCSS (css) {
     shadowWrapper.wrapper.appendChild(style);
 }
 
-const productSans = new FontFace("Product Sans", "url(https://fonts.gstatic.com/s/productsans/v19/pxiDypQkot1TnFhsFMOfGShVF9eO.woff2)", {
-    style: "normal", weight: "400"
-});
-
-productSans.load().then((loadedFace) => document.fonts.add(loadedFace));
-
-const inter300 = new FontFace("Inter", "url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMa.woff2)", {
-    style: "normal", weight: "300" 
-});
-
-inter300.load().then((loadedFace) => document.fonts.add(loadedFace));
-
 loadCSS(clickGUICSS);
 
 moduleManager.init();
@@ -38,7 +26,7 @@ setInterval(() => {
     events.emit("render");
 }, (1000 / 60));
 
-let debug = true;
+let debug = false;
 
 if (debug) {
     window.fentify = { hooks, shadowWrapper, moduleManager, packets };
