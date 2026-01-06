@@ -32,7 +32,7 @@
 .gui-panel {\r
     position: fixed;\r
     z-index: 1000;\r
-    width: 215px;\r
+    width: 145px;\r
     border-radius: var(--border-radius);\r
     background-color: var(--panel-bg);\r
     box-shadow: 0 8px 24px var(--shadow-color),\r
